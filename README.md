@@ -1,2 +1,3 @@
 # 100daycss
-参照https://100dayscss.com/，但是用自己的方式写出样式
+第一天：
+![](http://of8cwsho2.bkt.clouddn.com/100cssday/day-1.png)
