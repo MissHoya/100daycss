@@ -1,0 +1,125 @@
+$line-height: 8px;
+$line-space: 14px;
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  box-shadow: 1px 2px 10px 0 rgba(0,0,0,.3);
+  background-color: #3FAF82;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  .no-animation {
+    animation: none !important;
+  }
+  .line{
+    height: $line-height;
+    width: 80px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.3);
+    &-2{
+      margin: $line-space 0;
+    }
+  }
+  @for $i from 1 through 3 {
+    .line-#{$i} {
+      animation: animate-#{$i} .7s ease-in-out forwards;
+    }
+    .active {
+      .line-#{$i} {
+        animation: animate-#{$i}-active .7s ease-in-out forwards;
+      }
+    }
+  }
+}
+@keyframes animate-1 {
+  1000% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(0, $line-space + $line-height) rotate(0deg);
+  }
+
+  0% {
+    transform: translate(0, $line-space + $line-height) rotate(45deg);
+  }
+}
+@keyframes animate-1-active {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(0, $line-space + $line-height) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, $line-space + $line-height) rotate(45deg);
+  }
+}
+@keyframes animate-2 {
+  100% {
+    transform: scale(1);
+    opacity: (1);
+  }
+
+  50% {
+    transform: scale(0);
+    opacity: (0);
+  }
+
+  0% {
+    transform: scale(0);
+  }
+}
+
+@keyframes animate-2-active {
+  0% {
+    transform: scale(1);
+    opacity: (1);
+  }
+
+  50% {
+    transform: scale(0);
+    opacity: (0);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes animate-3 {
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(0, -($line-space + $line-height)) rotate(0deg);
+  }
+
+  0% {
+    transform: translate(0, -($line-space + $line-height)) rotate(135deg);
+  }
+}
+
+@keyframes animate-3-active {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(0, -($line-space + $line-height)) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(0, -($line-space + $line-height)) rotate(135deg);
+  }
+}

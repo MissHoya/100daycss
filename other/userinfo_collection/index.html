@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="date=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="format-detection" content="email=no">
+  <title>蛋糕英语</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>学员信息</header>
+  <div class="container">
+    <div class="pre-tip">
+      为了提供适合您孩子的学习内容，请您填写以下信息
+    </div>
+    <form class="form-input">
+      <div class="form-group" id="birth-group">
+        <label for="birth">出生年份</label>
+        <div class="input">
+          <input type="month" id='birth-input' min="2000-01">
+        </div>
+      </div>
+      <div class="form-group" id="grade-group">
+        <label for="birth">年级</label>
+        <div class="input">
+          <select name="" id="grade-input">
+            <option value=""></option>
+            <option value="1">未入学</option>
+            <option value="2">幼儿园</option>
+            <option value="3">小学一年级</option>
+            <option value="4">小学二年级</option>
+            <option value="5">小学三年级</option>
+            <option value="6">小学四年级</option>
+            <option value="7">小学五年级</option>
+            <option value="8">小学六年级</option>
+            <option value="9">初中一年级</option>
+            <option value="10">初中二年级</option>
+            <option value="11">初中三年级</option>
+            <option value="12">高中或以上</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" id="gender-group">
+        <div class="gender-select">
+          <div class="gender" data-type="boy">
+            <div class="avatar-wrapper">
+              <div class="gender-avatar">
+                <img src="userinfo_gender_boy.png" alt="">
+              </div>
+            </div>
+            <span>男孩</span>
+          </div>
+          <div class="gender" data-type="girl">
+            <div class="avatar-wrapper">
+              <div class="gender-avatar">
+                <img src="userinfo_gender_girl.png" alt="">
+              </div>
+            </div>
+            <span>女孩</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <a class="submit-btn disable" id="submit-btn">完成</a>
+      </div>
+    </form>
+  </div>
+</body>
+<script src="jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+  var InitPage = function() {
+    this.searchObj = {}
+    this.submitBtn = $('#submit-btn')
+    this.updateWord()
+    this.info = {
+      birth: '',
+      grade: '',
+      gender: ''
+    }
+    this.birthGroup = $('#birth-group')
+    this.gradeGroup = $('#grade-group')
+    this.genderGroup = $('#gender-group')
+    this.birthInput = $('#birth-input')
+    this.gradeSelect = $('#grade-input')
+    this.handleEvent()
+  }
+
+  InitPage.prototype.updateWord = function() {
+    var urlSearch = window.location.search
+    var location = window.location.origin
+    var searchStr = urlSearch.substr(1)
+    searchArr = searchStr.split('&')
+    for (var i = 0; i < searchArr.length; i++) {
+      this.searchObj[searchArr[i].split('=')[0]] = searchArr[i].split('=')[1]
+    }
+
+    if (this.searchObj['goto'] === 'vacab') {
+      this.submitBtn.text('进入测试')
+    }
+  }
+
+  InitPage.prototype.checkout = function() {
+    var self = this
+    if (this.info.birth && this.info.grade && this.info.gender) {
+      self.submitBtn.removeClass('disable')
+    } else {
+      self.submitBtn.addClass('disable')
+    }
+  }
+
+  InitPage.prototype.uploadData = function() {
+    
+  }
+
+  InitPage.prototype.handleEvent = function() {
+    var self = this
+    this.submitBtn.on('click', function() {
+      self.uploadData()
+      if (self.searchObj['goto'] === 'vacab') {
+        window.location.href = '/vocab_check?source=camp_progress'
+      } else {
+        window.location.href = '/camp_progress'
+      }
+    })
+
+
+    this.birthInput.on('change', function() {
+      if ($(this).val() && self.birthGroup.hasClass('error')) {
+        self.birthGroup.removeClass('error')
+      }
+      self.info.birth = $(this).val()
+      self.checkout()
+    })
+
+    this.gradeSelect.on('change', function() {
+      self.info.grade = $(this).val()
+      self.checkout()
+    })
+
+    this.genderGroup.on('click', '.gender', function() {
+      self.genderGroup.removeClass('error')
+      $(this).addClass('select').siblings('.gender').removeClass('select')
+      self.info.gender = $(this).attr('data-type')
+      self.checkout()
+    })
+  }
+
+  new InitPage()
+}
+</script>
+</html>

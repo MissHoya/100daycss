@@ -1,27 +1,42 @@
-var gulp = require('gulp')
-var autoprefix = require('gulp-autoprefixer')
-var sass = require('gulp-sass')
+const gulp = require('gulp')
+const autoprefix = require('gulp-autoprefixer')
+const sass = require('gulp-sass')
 
-gulp.task('sass', function() {
-  return gulp.src('./challenge/*/*.scss')
+const extractParam = (argv) => {
+  const obj = {}
+  for (const i of argv) {
+    const splitArr = i.split('=')
+    const objKey = splitArr[0].substring(2)
+    obj[objKey] = splitArr[1]
+  }
+  return obj
+}
+
+const params = extractParam(process.argv.slice(3))
+
+gulp.task('challenge-sass', function() {
+  var path = './challenge/' + params.folderName + '/*.scss'
+  var outPath = './challenge/' + params.folderName
+  return gulp.src(path)
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(autoprefix('last 2 versions'))
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./challenge'))
+    .pipe(gulp.dest(outPath))
 })
 
-gulp.task('watch', function() {
-  gulp.watch('./challenge/*/*.scss', ['sass'])
+gulp.task('challenge-watch', function() {
+  var path = './challenge/' + params.folderName + '/*.scss'
+  gulp.watch(path, ['challenge-sass'])
 })
 
 gulp.task('other-sass', function() {
   return gulp.src('./other/*/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'compressed', precision: 3}).on('error', sass.logError))
     .pipe(autoprefix('last 2 versions'))
     .pipe(gulp.dest('./other'))
 })
 gulp.task('other-watch', function() {
-  gulp.watch('./other/*/*.scss', ['scss'])
+  gulp.watch('./other/*/*.scss', ['other-sass'])
 })
 
-gulp.task('default', ['watch', 'sass'])
-gulp.task('other', ['other-', 'other-sass'])
+gulp.task('challenge', ['challenge-watch', 'challenge-sass'])
+gulp.task('other', ['other-watch', 'other-sass'])

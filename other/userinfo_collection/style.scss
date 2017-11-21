@@ -1,0 +1,160 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+$theme-color: #FF6047;
+@function pxToVh($px) {
+  @return $px / 1008 * 100 + vh
+}
+@mixin line-height($fs, $l) {
+  line-height: $l / $fs
+}
+body{
+  background-color: $theme-color;
+  color: $theme-color;
+}
+header{
+  width: 100vw;
+  height: 11.11vh;
+  background: $theme-color url(/assets/app/image/shading.png) ;
+  // background: $theme-color url(shading.png);
+  background-size: 25% auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 50% 50%/0 0 39.28% 39.28%;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.83px;
+  line-height: 11.11vh;
+  text-align: center;
+  font-size: pxToVh(40)
+}
+.container{
+  height: 98.9vh;
+  background-color: #fff;
+  width: 96.875vw;
+  margin: 0 auto;
+  padding: pxToVh(157) pxToVh(35) 0;
+  font-size: pxToVh(26);
+}
+.pre-tip{
+  font-size: pxToVh(22);
+  @include line-height(22, 48)
+}
+.pre-tip::before{
+  content: '';
+  display: inline-block;
+  background-color: $theme-color;
+  width: pxToVh(18);
+  height: pxToVh(18);
+  border-radius: 100%;
+}
+.pre-tip::after{
+  content: '我们承诺将对孩子的信息严格保密';
+  display: block;
+  color: #9FB2B6;
+  font-size: pxToVh(20);
+  letter-spacing: 1px;
+}
+.form-group{
+  margin-top: pxToVh(29);
+  &.error{
+    .input{
+      border-color: #F42100;
+    }
+    .gender:nth-of-type(2) .avatar-wrapper{
+      border-color: $theme-color;
+    }
+  }
+  label{
+    padding-left: pxToVh(35);
+    letter-spacing: 1.08px;
+    @include line-height(26, 50);
+  }
+  .input{
+    height: pxToVh(85);
+    width: 100%;
+    border: 1px solid #FFE1DC;
+    border-radius: pxToVh(8);
+    overflow: hidden;
+    *{
+      background-color: #FFF8F8;
+      height: 100%;
+      width: 100%;
+      border: none;
+      padding-left: pxToVh(35);
+      color: #6D7584;
+      font-size: pxToVh(26);
+    }
+    input, select{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+  }
+}
+.gender-select{
+  display: flex;
+  justify-content: center;
+  .gender{
+    margin: 0 pxToVh(41.5);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    &.select{
+      .gender-avatar{
+        position: relative;
+      }
+      .gender-avatar:before{
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // background: rgba(0,0,0,.3) url(check-icon.png) no-repeat center;
+        background: rgba(0,0,0,.3) url(/assets/app/image/check-icon.png) no-repeat center;
+      }
+    }
+    .avatar-wrapper{
+      width: pxToVh(110);
+      height: pxToVh(110);
+      border-radius: 100%;
+      border: 1px solid transparent;
+      padding: pxToVh(5);
+    }
+    .gender-avatar{
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      line-height: 1;
+      text-align: center;
+      overflow: hidden;
+      img{
+        max-width: 100%;
+      }
+    }
+    span{
+      letter-spacing: 1.08px;
+      font-weight: bold;
+      @include line-height(26, 50);
+    }
+  }
+}
+.submit-btn{
+  display: block;
+  font-size: pxToVh(32);
+  font-weight: bold;
+  text-align: center;
+  width: pxToVh(400);
+  margin: 0 auto;
+  padding: pxToVh(12) 0 pxToVh(18);
+  border-radius: 10%/50%;
+  @include line-height(32, 50);
+  color: #fff;
+  background-color: $theme-color;
+  letter-spacing: 10px;
+  &.disable{
+    background-color: #D8D8D8;
+  }
+}
