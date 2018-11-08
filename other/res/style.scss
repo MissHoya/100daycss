@@ -44,10 +44,21 @@ li{
 .iconfont{
   font-size: 0.8em;
   margin-left: 4px;
+  &-img{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background: url(../../assets/logo.jpg) no-repeat center;
+    background-size: contain;
+    vertical-align: text-top;
+  }
 }
 .company{
   font-size: 1.3em;
   line-height: 2;
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
   .iconfont{
     margin: 0;
     font-size: 1em;
