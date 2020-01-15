@@ -38,7 +38,7 @@ function otherSass() {
   return gulp.src('./other/*/*.scss')
     .pipe(sass({outputStyle: 'compressed', precision: 3}).on('error', sass.logError))
     .pipe(autoprefix('last 2 versions'))
-    .pipe(gulp.dest('./other'))
+    .pipe(gulp.dest('./other/'))
 }
 
 // gulp.task('challenge', ['challenge-watch', 'challenge-sass'])

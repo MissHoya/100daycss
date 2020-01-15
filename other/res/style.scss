@@ -3,20 +3,23 @@
 body{
   padding: 10px 24px;
   position: relative;
+  line-height: 1.8;
 }
 header{
   margin: 0 0 10px;
 }
 h4 > small, h3 > small{ font-size: 0.7em;color:#666;font-weight:normal; margin-left: .5em;}
-hr{height: 2px;width: 100%; background-color: #DFDFDF; border: none; margin: 3px 0;}
+hr{height: 2px;width: 100%; background-color: #DFDFDF; border: none;}
 h3{font-size: 1.2em;}
 h4{font-size: 1.05em; line-height: 1.6}
 section{
   margin-top: 14px;
   font-size: .85em;
 }
-.project-module {
-  line-height: 1.2;
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .project-module:not(:first-child){
   margin-top: 10px;
@@ -33,16 +36,10 @@ section{
   aside{
     flex: 1;
     padding-right: 10px;
-    div{
-      line-height: 1.4;
-    }
   }
 }
 li{
   list-style: none;
-}
-.skill-detail li{
-  line-height: 1.4;
 }
 .iconfont{
   font-size: 0.8em;
@@ -54,11 +51,16 @@ li{
     background: url(../../assets/logo.jpg) no-repeat center;
     background-size: contain;
     vertical-align: text-top;
+    margin-right: 0.5em;
   }
 }
 .company{
-  font-size: 1.3em;
+  font-size: 1.2em;
   line-height: 2;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   &:not(:first-child) {
     margin-top: 10px;
   }
