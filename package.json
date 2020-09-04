@@ -16,6 +16,6 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.1",
     "gulp-sass": "^3.2.1",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.1"
   }
 }
